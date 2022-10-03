@@ -20,26 +20,26 @@ public class EFSongsService : ISongsService
          return _dataContext.Songs.SingleOrDefault(s => s.Id == id) != null;
     }
 
-    public Songs FindById(int id)
+    public Song FindById(int id)
     {
-       Songs temp = _dataContext.Songs.SingleOrDefault(s => s.Id == id);
+       Song temp = _dataContext.Songs.SingleOrDefault(s => s.Id == id);
        
        return temp;
     }
 
-    public Songs FindBySongTitle(string title)
+    public Song FindBySongTitle(string title)
     {
-        Songs temp = _dataContext.Songs.SingleOrDefault(s => s.Title == title);
+        Song temp = _dataContext.Songs.SingleOrDefault(s => s.Title == title);
        
        return temp;
     }
 
-    public List<Songs> GetAll()
+    public List<Song> GetAll()
     {
         return _dataContext.Songs.ToList();
     }
 
-    public Songs Save(Songs songs)
+    public Song Save(Song songs)
     {
         if(songs.Id == null || songs.Id == 0)
         {
@@ -51,7 +51,7 @@ public class EFSongsService : ISongsService
         return songs;
     }
 
-    public Songs Save(Dictionary<string, object> hash)
+    public Song Save(Dictionary<string, object> hash)
     {
         var builder = new BuildSongFromHash(hash);
         builder.run();

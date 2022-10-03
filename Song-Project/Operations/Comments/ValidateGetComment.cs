@@ -5,8 +5,8 @@ using Song_Project.Operations;
 
 public class ValidateGetComment : Validator
 {
-    public Comments Comments {get; set;}
-    public ValidateGetComment(Comments c)
+    public Comment Comments {get; set;}
+    public ValidateGetComment(Comment c)
     {
         Comments = c;
     }

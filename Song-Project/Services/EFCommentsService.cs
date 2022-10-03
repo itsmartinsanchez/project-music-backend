@@ -14,19 +14,19 @@ public class EFCommentsService : ICommentsService
     {
         _dataContext = dataContext;
     }
-    public Comments FindById(int id)
+    public Comment FindById(int id)
     {
-       Comments temp = _dataContext.Comments.SingleOrDefault(s => s.Id == id);
+       Comment temp = _dataContext.Comments.SingleOrDefault(s => s.Id == id);
        
        return temp; 
     }
 
-    public List<Comments> GetAll()
+    public List<Comment> GetAll()
     {
         return _dataContext.Comments.ToList();
     }
 
-    public Comments Save(Comments comments)
+    public Comment Save(Comment comments)
     {
         if(comments.Id == null || comments.Id == 0)
         {
@@ -38,7 +38,7 @@ public class EFCommentsService : ICommentsService
         return comments;
     }
 
-    public Comments Save(Dictionary<string, object> hash)
+    public Comment Save(Dictionary<string, object> hash)
     {
         var builder = new BuildCommentFromHash(hash);
         builder.run();

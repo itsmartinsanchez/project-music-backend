@@ -5,11 +5,11 @@ using Song_Project.Models;
 public class BuildArtistFromHash
 {
     public Dictionary<string, object> Hash { get; set; }
-    public Artists Artists  {get; set; }
+    public Artist Artists  {get; set; }
     public BuildArtistFromHash(Dictionary<string, object> hash)
     {
         Hash = hash;
-        Artists = new Artists();
+        Artists = new Artist();
     }
 
     public void run()

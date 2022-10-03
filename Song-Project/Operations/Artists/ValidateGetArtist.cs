@@ -5,15 +5,15 @@ using Song_Project.Operations;
 
 public class ValidateGetArtist : Validator
 {
-    public Artists Artists { get; private set; }
-    public ValidateGetArtist(Artists artists)
+    public Artist Artist { get; private set; }
+    public ValidateGetArtist(Artist artists)
     {
-        Artists = artists;
+        Artist = artists;
     }
 
     public override void run()
     {
-        if(this.Artists == null) {
+        if(this.Artist == null) {
             String msg = "Artist not found";
             this.AddError(msg, "id");
         }

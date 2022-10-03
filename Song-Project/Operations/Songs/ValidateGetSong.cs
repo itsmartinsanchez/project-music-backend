@@ -5,8 +5,8 @@ using Song_Project.Operations;
 
 public class ValidateGetSong : Validator
 {
-    public Songs Songs {get; set;}
-    public ValidateGetSong(Songs s)
+    public Song Songs {get; set;}
+    public ValidateGetSong(Song s)
     {
         Songs = s;
     }

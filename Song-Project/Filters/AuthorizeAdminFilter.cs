@@ -18,7 +18,7 @@ public class AuthorizeAdminFilter : Attribute, IActionFilter
         try 
         {
             if(context.HttpContext.Items.ContainsKey("user")) {
-                Users user = (Users)context.HttpContext.Items["user"];
+                User user = (User)context.HttpContext.Items["user"];
 
                 if(!user.Role.Equals("admin")) {
                     Dictionary<string, object> payload = new Dictionary<string, object>();

@@ -17,7 +17,7 @@ public class AuthenticationService
         _dataContext = dataContext;
     }
 
-    public void Logout(Users user)
+    public void Logout(User user)
     {
         user.Token = null;
 
@@ -26,7 +26,7 @@ public class AuthenticationService
 
     public string Login(string username, string password)
     {
-        Users user = _userService.FindByUsername(username);
+        User user = _userService.FindByUsername(username);
 
         if(user == null) {
             throw new InvalidLoginException();

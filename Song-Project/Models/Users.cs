@@ -1,6 +1,6 @@
 namespace Song_Project.Models;
 
-public class Users
+public class User
 {
     public Int32 Id { get; set; }
     public string Username { get; set; }

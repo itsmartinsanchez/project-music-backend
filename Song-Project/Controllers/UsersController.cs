@@ -27,7 +27,7 @@ public class UsersController : ControllerBase
     [ServiceFilter(typeof(AuthenticationFilter))]
     public ActionResult Logout()
     {
-        Users user = (Users)HttpContext.Items["user"];
+        User user = (User)HttpContext.Items["user"];
         _authenticationService.Logout(user);
 
         Dictionary<string, string> msg = new Dictionary<string, string>();

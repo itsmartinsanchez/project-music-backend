@@ -32,7 +32,7 @@ public class ArtistsController : ControllerBase
     [HttpGet]
     public IActionResult Index()
     {
-        List<Artists> artists = _artistsService.GetAll();
+        List<Artist> artists = _artistsService.GetAll();
 
         Console.WriteLine("Returning all Artists...");
         return Ok(artists);
@@ -41,7 +41,7 @@ public class ArtistsController : ControllerBase
     [HttpGet("{id}")]
     public IActionResult Show(int id)
     {
-        Artists artists = _artistsService.FindById(id);
+        Artist artists = _artistsService.FindById(id);
 
         Validator validator = new ValidateGetArtist(artists); 
         validator.run();
@@ -91,7 +91,7 @@ public class ArtistsController : ControllerBase
             if(_validateSaveArtists.HasErrors) {
                 return UnprocessableEntity(_validateSaveArtists.Payload);
             } else {
-                Artists temp = _artistsService.Save(hash);
+                Artist temp = _artistsService.Save(hash);
                 return Ok(temp);
             }
         } catch(Exception e) {

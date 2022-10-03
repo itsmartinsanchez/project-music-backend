@@ -1,15 +1,15 @@
 namespace Song_Project.Models;
 
 
-public class Artists
+public class Artist
 {
     public Int32 Id {get; set;}
     public String Name {get; set;}
-    public Artists()
+    public Artist()
     {
         
     }
-    public Artists (int id, string name)
+    public Artist (int id, string name)
     {
         this.Id = id;
         this.Name = name;

@@ -7,9 +7,9 @@ class GenerateToken
 {
     public string Token { get; private set; }
 
-    private Users _users;
+    private User _users;
 
-    public GenerateToken(Users users)
+    public GenerateToken(User users)
     {
         _users = users;
     }

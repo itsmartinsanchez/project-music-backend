@@ -6,7 +6,7 @@ using System.Text.Json;
 
 public class ValidateDeleteArtist : Validator
 {
-    public Artists Artists {get; set;}
+    public Artist Artist {get; set;}
 
     private readonly IArtistsService _artistsService;
 
@@ -16,7 +16,7 @@ public class ValidateDeleteArtist : Validator
     }
     public override void run()
     {
-        if(this.Artists == null) {
+        if(this.Artist == null) {
             String msg = "Artist not found";
             this.AddError(msg, "id");
         }

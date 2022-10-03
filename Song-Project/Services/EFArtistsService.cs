@@ -15,13 +15,13 @@ public class EFArtistsService : IArtistsService
         _dataContext = dataContext;
     }
 
-    public Artists Delete(Artists a)
+    public Artist Delete(Artist a)
     {
         if(a.Id == null || a.Id == 0)
         {
-            _dataContext.Artists.Remove(a);
+            _dataContext.Artist.Remove(a);
         } else {
-            Artists temp = this.FindById(a.Id);
+            Artist temp = this.FindById(a.Id);
             temp.Name = a.Name;
         }
 
@@ -32,22 +32,22 @@ public class EFArtistsService : IArtistsService
 
     public bool Exists(int id)
     {
-        return _dataContext.Artists.SingleOrDefault(a => a.Id == id) != null;
+        return _dataContext.Artist.SingleOrDefault(a => a.Id == id) != null;
     }
 
     public bool Exists(string name)
     {
-         return _dataContext.Artists.SingleOrDefault(a => a.Name.Equals(name)) != null;
+         return _dataContext.Artist.SingleOrDefault(a => a.Name.Equals(name)) != null;
     }
 
-    public Artists FindById(int id)
+    public Artist FindById(int id)
     {
-        Artists temp = _dataContext.Artists.SingleOrDefault(a => a.Id == id);
+        Artist temp = _dataContext.Artist.SingleOrDefault(a => a.Id == id);
         
         return temp;
     }
 
-    public Artists FindByName(string name)
+    public Artist FindByName(string name)
     {
         if(name != null) {
             var pName = new SqlParameter(
@@ -55,7 +55,7 @@ public class EFArtistsService : IArtistsService
                 name
             );
 
-            Artists a = _dataContext.Artists
+            Artist a = _dataContext.Artist
                             .FromSqlRaw("SELECT * FROM dbo.Artists WHERE Name=@name", pName)
                             .SingleOrDefault();
 
@@ -65,19 +65,19 @@ public class EFArtistsService : IArtistsService
         return null;
     }
 
-    public List<Artists> GetAll()
+    public List<Artist> GetAll()
     {
-        return _dataContext.Artists.ToList();
+        return _dataContext.Artist.ToList();
 
         
     }
-    public Artists Save(Artists a)
+    public Artist Save(Artist a)
     {
         if(a.Id == null || a.Id == 0)
         {
-            _dataContext.Artists.Add(a);
+            _dataContext.Artist.Add(a);
         } else {
-            Artists temp = this.FindById(a.Id);
+            Artist temp = this.FindById(a.Id);
             temp.Name = a.Name;
         }
 
@@ -86,7 +86,7 @@ public class EFArtistsService : IArtistsService
         return a;
     }
 
-    public Artists Save(Dictionary<string, object> hash)
+    public Artist Save(Dictionary<string, object> hash)
     {
         var builder = new BuildArtistFromHash(hash);
         builder.run();

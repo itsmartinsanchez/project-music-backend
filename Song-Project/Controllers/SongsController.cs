@@ -28,7 +28,7 @@ public class SongsController : ControllerBase
     [HttpGet]
     public IActionResult Index()
     {
-        List<Songs> songs = _songsService.GetAll();
+        List<Song> songs = _songsService.GetAll();
 
         Console.WriteLine("Returning all songs...");
         return Ok(songs);
@@ -37,7 +37,7 @@ public class SongsController : ControllerBase
     [HttpGet("{id}")]
     public IActionResult Show(int id)
     {
-        Songs songs = _songsService.FindById(id);
+        Song songs = _songsService.FindById(id);
 
         Validator validator = new ValidateGetSong(songs); 
         validator.run();
@@ -61,7 +61,7 @@ public class SongsController : ControllerBase
             if(_validateSaveSong.HasErrors) {
                 return UnprocessableEntity(_validateSaveSong.Payload);
             } else {
-                Songs temp = _songsService.Save(hash);
+                Song temp = _songsService.Save(hash);
                 return Ok(temp);
             }
         } catch(Exception e) {
@@ -87,7 +87,7 @@ public class SongsController : ControllerBase
             if(_validateSaveSong.HasErrors) {
                 return UnprocessableEntity(_validateSaveSong.Payload);
             } else {
-                Songs temp = _songsService.Save(hash);
+                Song temp = _songsService.Save(hash);
                 return Ok(temp);
             }
         } catch(Exception e) {

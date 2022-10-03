@@ -20,24 +20,24 @@ public class EFUserService : IUserService
         return _dataContext.Comments.SingleOrDefault(c => c.Id == id) != null;
     }
 
-    public Users FindByToken(string token)
+    public User FindByToken(string token)
     {
         return _dataContext.Users.SingleOrDefault(u => u.Token.Equals(token));
     }
 
-    public Users FindByUsername(string username)
+    public User FindByUsername(string username)
     {
         return _dataContext.Users.SingleOrDefault(u => u.Username.Equals(username));
     }
 
-    public Users Register(string username, string password, string role)
+    public User Register(string username, string password, string role)
     {
         HashPassword hasher = new HashPassword(password);
         hasher.run();
 
         string encryptedPassword = hasher.Hash;
 
-        Users user = new Users() {
+        User user = new User() {
             Username = username,
             EncryptedPassword = encryptedPassword,
             Role = role

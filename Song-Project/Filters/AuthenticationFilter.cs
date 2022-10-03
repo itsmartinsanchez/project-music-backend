@@ -22,7 +22,7 @@ class AuthenticationFilter : Attribute, IAuthorizationFilter
 
             string tokenValue = context.HttpContext.Request.Headers["X-AWESOME-AUTHENTICATION"].ToString();
 
-            Users user = _userService.FindByToken(tokenValue);
+            User user = _userService.FindByToken(tokenValue);
 
             if(user != null) {
                 isAuthenticated = true;

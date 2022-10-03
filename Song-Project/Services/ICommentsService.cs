@@ -4,8 +4,8 @@ using Song_Project.Models;
 
 public interface ICommentsService
 {
-    public List<Comments> GetAll();
-    public Comments FindById(int id);
-    public Comments Save(Comments comments);
-    public Comments Save(Dictionary<string, object> hash);
+    public List<Comment> GetAll();
+    public Comment FindById(int id);
+    public Comment Save(Comment comments);
+    public Comment Save(Dictionary<string, object> hash);
 }

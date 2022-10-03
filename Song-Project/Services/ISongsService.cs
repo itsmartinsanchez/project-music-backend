@@ -4,11 +4,11 @@ using Song_Project.Models;
 
 public interface ISongsService
 {
-    public List<Songs> GetAll();
-    public Songs FindById(int id);
-    public Songs FindBySongTitle(string title);
-    public Songs Save(Songs songs);
-    public Songs Save(Dictionary<string, object> hash);
+    public List<Song> GetAll();
+    public Song FindById(int id);
+    public Song FindBySongTitle(string title);
+    public Song Save(Song songs);
+    public Song Save(Dictionary<string, object> hash);
     public bool Exists(int id);
 
 }

@@ -5,11 +5,11 @@ using Song_Project.Models;
 public class BuildCommentFromHash
 {
     public Dictionary<string, object> Hash { get; set; }
-    public Comments Comments  {get; set; }
+    public Comment Comments  {get; set; }
     public BuildCommentFromHash(Dictionary<string, object> hash)
     {
         Hash = hash;
-        Comments = new Comments();
+        Comments = new Comment();
     }
 
     public void run()

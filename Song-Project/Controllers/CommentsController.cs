@@ -33,7 +33,7 @@ public class CommentsController : ControllerBase
     [HttpGet]
     public IActionResult Index()
     {
-        List<Comments> comments = _commentsService.GetAll();
+        List<Comment> comments = _commentsService.GetAll();
 
         Console.WriteLine("Returning all comments...");
         return Ok(comments);
@@ -42,7 +42,7 @@ public class CommentsController : ControllerBase
     [HttpGet("{id}")]
     public IActionResult Show(int id)
     {
-        Comments comments = _commentsService.FindById(id);
+        Comment comments = _commentsService.FindById(id);
 
         Validator validator = new ValidateGetComment(comments); 
         validator.run();
@@ -65,7 +65,7 @@ public class CommentsController : ControllerBase
             if(_validateSaveComment.HasErrors) {
                 return UnprocessableEntity(_validateSaveComment.Payload);
             } else {
-                Comments temp = _commentsService.Save(hash);
+                Comment temp = _commentsService.Save(hash);
                 return Ok(temp);
             }
         } catch(Exception e) {
@@ -91,7 +91,7 @@ public class CommentsController : ControllerBase
             if(_validateSaveComment.HasErrors) {
                 return UnprocessableEntity(_validateSaveComment.Payload);
             } else {
-                Comments temp = _commentsService.Save(hash);
+                Comment temp = _commentsService.Save(hash);
                 return Ok(temp);
             }
         } catch(Exception e) {

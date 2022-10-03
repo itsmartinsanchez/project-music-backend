@@ -4,8 +4,8 @@ using Song_Project.Models;
 
 public interface IUserService 
 {
-    public Users FindByUsername(string username);
-    public Users Register(string username, string password, string role);
-    public Users FindByToken(string token);
+    public User FindByUsername(string username);
+    public User Register(string username, string password, string role);
+    public User FindByToken(string token);
     public bool Exists(int id);
 }

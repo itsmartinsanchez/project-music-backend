@@ -9,9 +9,9 @@ public class RawArtistsService : IArtistsService
 {
     private const string ArtistsTable = "Artists";
 
-    public List<Artists> GetAll()
+    public List<Artist> GetAll()
     {
-        List<Artists> artists = new List<Artists>();
+        List<Artist> artists = new List<Artist>();
 
         SqlConnection connection = new SqlConnection(
             ApplicationManager.Instance.GetConnectionString()
@@ -29,7 +29,7 @@ public class RawArtistsService : IArtistsService
 
         while(reader.Read()) {
             artists.Add(
-                new Artists(
+                new Artist(
                     (int)reader["Id"],
                     (string)reader["Name"]
                 )
@@ -41,7 +41,7 @@ public class RawArtistsService : IArtistsService
         return artists;
     }
 
-    public Artists FindById(int id)
+    public Artist FindById(int id)
     {
         throw new NotImplementedException();
     }
@@ -56,12 +56,12 @@ public class RawArtistsService : IArtistsService
         throw new NotImplementedException();
     }
 
-    public Artists FindByName(string name)
+    public Artist FindByName(string name)
     {
         throw new NotImplementedException();
     }
 
-    public Artists Save(Artists a)
+    public Artist Save(Artist a)
     {
         SqlConnection connection = new SqlConnection(
             ApplicationManager.Instance.GetConnectionString()
@@ -91,17 +91,17 @@ public class RawArtistsService : IArtistsService
         return a;
     }
 
-    public Artists Save(Dictionary<string, object> hash)
+    public Artist Save(Dictionary<string, object> hash)
     {
         Int32 id       = Int32.Parse(hash["id"].ToString());
         String name    = hash["name"].ToString();
 
-        Artists temp = new Artists(id, name);
+        Artist temp = new Artist(id, name);
 
         return this.Save(temp);
     }
 
-    public Artists Delete(Artists a)
+    public Artist Delete(Artist a)
     {
         throw new NotImplementedException();
     }

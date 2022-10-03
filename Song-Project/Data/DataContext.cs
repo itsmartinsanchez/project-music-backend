@@ -5,14 +5,14 @@ using Song_Project.Models;
 
 public class DataContext : DbContext
 {
-    public DbSet<Artists> Artists {get; set;}
-    public DbSet<Songs> Songs {get; set;}
-    public DbSet<Users> Users { get; set; }
-    public DbSet<Comments> Comments {get; set;}
+    public DbSet<Artist> Artist {get; set;}
+    public DbSet<Song> Songs {get; set;}
+    public DbSet<User> Users { get; set; }
+    public DbSet<Comment> Comments {get; set;}
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
-        builder.Entity<Artists>()
+        builder.Entity<Artist>()
         .HasIndex(a => a.Name)
         .IsUnique();
         
