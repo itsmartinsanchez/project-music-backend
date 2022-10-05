@@ -17,17 +17,17 @@ public class EFUserService : IUserService
 
     public bool Exists(int id)
     {
-        return _dataContext.Comments.SingleOrDefault(c => c.Id == id) != null;
+        return _dataContext.Comment.SingleOrDefault(c => c.Id == id) != null;
     }
 
     public User FindByToken(string token)
     {
-        return _dataContext.Users.SingleOrDefault(u => u.Token.Equals(token));
+        return _dataContext.User.SingleOrDefault(u => u.Token.Equals(token));
     }
 
     public User FindByUsername(string username)
     {
-        return _dataContext.Users.SingleOrDefault(u => u.Username.Equals(username));
+        return _dataContext.User.SingleOrDefault(u => u.Username.Equals(username));
     }
 
     public User Register(string username, string password, string role)
@@ -43,7 +43,7 @@ public class EFUserService : IUserService
             Role = role
         };
 
-        _dataContext.Users.Add(user);
+        _dataContext.User.Add(user);
         _dataContext.SaveChanges();
 
         return user;

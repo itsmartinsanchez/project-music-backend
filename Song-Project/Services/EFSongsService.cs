@@ -17,33 +17,33 @@ public class EFSongsService : ISongsService
 
     public bool Exists(int id)
     {
-         return _dataContext.Songs.SingleOrDefault(s => s.Id == id) != null;
+         return _dataContext.Song.SingleOrDefault(s => s.Id == id) != null;
     }
 
     public Song FindById(int id)
     {
-       Song temp = _dataContext.Songs.SingleOrDefault(s => s.Id == id);
+       Song temp = _dataContext.Song.SingleOrDefault(s => s.Id == id);
        
        return temp;
     }
 
     public Song FindBySongTitle(string title)
     {
-        Song temp = _dataContext.Songs.SingleOrDefault(s => s.Title == title);
+        Song temp = _dataContext.Song.SingleOrDefault(s => s.Title == title);
        
        return temp;
     }
 
     public List<Song> GetAll()
     {
-        return _dataContext.Songs.ToList();
+        return _dataContext.Song.ToList();
     }
 
     public Song Save(Song songs)
     {
         if(songs.Id == null || songs.Id == 0)
         {
-            _dataContext.Songs.Add(songs);
+            _dataContext.Song.Add(songs);
         }
 
         _dataContext.SaveChanges();

@@ -6,9 +6,9 @@ using Song_Project.Models;
 public class DataContext : DbContext
 {
     public DbSet<Artist> Artist {get; set;}
-    public DbSet<Song> Songs {get; set;}
-    public DbSet<User> Users { get; set; }
-    public DbSet<Comment> Comments {get; set;}
+    public DbSet<Song> Song {get; set;}
+    public DbSet<User> User { get; set; }
+    public DbSet<Comment> Comment {get; set;}
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

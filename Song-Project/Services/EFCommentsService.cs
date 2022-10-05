@@ -16,21 +16,21 @@ public class EFCommentsService : ICommentsService
     }
     public Comment FindById(int id)
     {
-       Comment temp = _dataContext.Comments.SingleOrDefault(s => s.Id == id);
+       Comment temp = _dataContext.Comment.SingleOrDefault(s => s.Id == id);
        
        return temp; 
     }
 
     public List<Comment> GetAll()
     {
-        return _dataContext.Comments.ToList();
+        return _dataContext.Comment.ToList();
     }
 
     public Comment Save(Comment comments)
     {
         if(comments.Id == null || comments.Id == 0)
         {
-            _dataContext.Comments.Add(comments);
+            _dataContext.Comment.Add(comments);
         }
 
         _dataContext.SaveChanges();
