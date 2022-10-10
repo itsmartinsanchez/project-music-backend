@@ -26,11 +26,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IArtistsService, EFArtistsService>();
 builder.Services.AddScoped<ISongsService, EFSongsService>();
 builder.Services.AddScoped<IUserService, EFUserService>();
-/*
 builder.Services.AddScoped<ICommentsService, EFCommentsService>();
 builder.Services.AddScoped<ValidateSaveComment, ValidateSaveComment>();
-builder.Services.AddScoped<ValidateGetComment, ValidateGetComment>();
-*/
 builder.Services.AddScoped<ValidateSaveArtists, ValidateSaveArtists>();
 builder.Services.AddScoped<ValidateSaveSong, ValidateSaveSong>();
 builder.Services.AddScoped<ValidateDeleteArtist, ValidateDeleteArtist>();

@@ -12,12 +12,18 @@ using Song_Project.Filters;
 [Route("users")]
 public class UsersController : ControllerBase
 {
+    private readonly ILogger<UsersController> _logger;
     private readonly IUserService _userService;
     private readonly AuthenticationService _authenticationService;
     private readonly ValidateRegister _validateRegister;
 
-    public UsersController(IUserService userService, ValidateRegister validateRegister, AuthenticationService authenticationService)
+    public UsersController(
+        ILogger<UsersController> logger, 
+        IUserService userService, 
+        ValidateRegister validateRegister, 
+        AuthenticationService authenticationService)
     {
+        _logger = logger;
         _userService = userService;
         _validateRegister = validateRegister;
         _authenticationService = authenticationService;
@@ -57,6 +63,7 @@ public class UsersController : ControllerBase
         {
             Dictionary<string, string> msg = new Dictionary<string, string>();
             msg["message"] = "Invalid login";
+            
             System.Console.WriteLine(e.StackTrace);
 
             return StatusCode(StatusCodes.Status404NotFound, msg);
@@ -65,6 +72,9 @@ public class UsersController : ControllerBase
         {
             Dictionary<string, string> msg = new Dictionary<string, string>();
             msg["message"] = "Something went wrong";
+            _logger.LogInformation(e.Message);
+            _logger.LogInformation(e.StackTrace);
+            System.Console.WriteLine(e.StackTrace);
 
             return StatusCode(StatusCodes.Status500InternalServerError, msg);
         }
