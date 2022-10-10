@@ -101,7 +101,7 @@ public class RawArtistsService : IArtistsService
         return this.Save(temp);
     }
 
-    public Artist Delete(Artist a)
+    public Artist Delete(int id)
     {
         throw new NotImplementedException();
     }

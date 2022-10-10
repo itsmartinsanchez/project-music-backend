@@ -38,21 +38,7 @@ public class CommentsController : ControllerBase
         Console.WriteLine("Returning all comments...");
         return Ok(comments);
     }
-    
-    [HttpGet("{id}")]
-    public IActionResult Show(int id)
-    {
-        Comment comments = _commentsService.FindById(id);
 
-        Validator validator = new ValidateGetComment(comments); 
-        validator.run();
-
-        if(validator.HasErrors) {
-            return NotFound(validator.Payload);
-        } else {
-            return Ok(comments);
-        }
-    }
     [HttpPut("{id}")]
     public IActionResult Update([FromBody]object payload, int id)
     {

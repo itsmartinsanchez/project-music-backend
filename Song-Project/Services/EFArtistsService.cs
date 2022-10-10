@@ -15,19 +15,13 @@ public class EFArtistsService : IArtistsService
         _dataContext = dataContext;
     }
 
-    public Artist Delete(Artist a)
+    public Artist Delete(int id)
     {
-        if(a.Id == null || a.Id == 0)
-        {
-            _dataContext.Artist.Remove(a);
-        } else {
-            Artist temp = this.FindById(a.Id);
-            temp.Name = a.Name;
-        }
-
+        Artist artist = new Artist () {Id = id };
+        _dataContext.Artist.Attach(artist);
+        _dataContext.Artist.Remove(artist);
         _dataContext.SaveChanges();
-
-        return a;
+        return artist;
     }
 
     public bool Exists(int id)

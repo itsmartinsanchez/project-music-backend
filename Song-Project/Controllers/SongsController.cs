@@ -13,15 +13,18 @@ public class SongsController : ControllerBase
 {
     private readonly ILogger<SongsController> _logger;
     private readonly ISongsService _songsService;
+    private readonly ICommentsService _commentsService;
     private readonly IArtistsService _artistsService;
     private readonly ValidateSaveSong _validateSaveSong;
     public SongsController(
-        ILogger<SongsController> logger, 
+        ILogger<SongsController> logger,
+        ICommentsService commentsService,  
         ISongsService songsService,
         ValidateSaveSong validateSaveSong
         )
     {
         _logger = logger;
+        _commentsService = commentsService;
         _songsService = songsService;
         _validateSaveSong = validateSaveSong;
     }
@@ -99,5 +102,14 @@ public class SongsController : ControllerBase
             return StatusCode(StatusCodes.Status500InternalServerError, msg);
 
         }
+    }
+    
+    [HttpGet("id/comments")]
+    public IActionResult ShowComments(int songId)
+    {
+        List<Comment> comments = _commentsService.FindBySongId(songId);
+
+        Console.WriteLine("Returning song comments...");
+        return Ok(comments);
     }
 }

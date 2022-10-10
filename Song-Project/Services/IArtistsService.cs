@@ -11,5 +11,5 @@ public interface IArtistsService
     public Artist FindByName(string name);
     public Artist Save(Artist a);
     public Artist Save(Dictionary<string, object> hash);
-    public Artist Delete(Artist a);
+    public Artist Delete(int id);
 }

@@ -14,7 +14,7 @@ public class ValidateGetComment : Validator
     {
         if(Comments == null)
         {
-            string m = "Comments not found";
+            string m = "Comment not found";
             Messages.Add(m);
 
             Dictionary<string, object> mHash = new Dictionary<string, object>();

@@ -21,6 +21,11 @@ public class EFCommentsService : ICommentsService
        return temp; 
     }
 
+    public List<Comment> FindBySongId(int songId)
+    {
+       return _dataContext.Comment.Where(s => s.SongId == songId).ToList();
+    }
+
     public List<Comment> GetAll()
     {
         return _dataContext.Comment.ToList();
