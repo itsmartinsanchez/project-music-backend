@@ -105,25 +105,36 @@ public class ArtistsController : ControllerBase
         }
     }
     [HttpDelete]
-    public IActionResult Delete([FromBody]object payload, int id)
+    // remove payload
+    public IActionResult Delete(int id)
     {
         try {
-            Dictionary<string, object> hash = JsonSerializer.Deserialize<Dictionary<string, object>>(payload.ToString());
+            Artist artist = _artistsService.FindById(id);
+            Validator validator = new ValidateGetArtist(artist);
+            validator.run();
 
-            hash["id"] = id;
-           _validateDeleteArtists.run();
-
-            if(_validateDeleteArtists.HasErrors) {
-                return UnprocessableEntity(_validateDeleteArtists.Payload);
+            if(validator.HasErrors) {
+                return UnprocessableEntity(validator.Payload);
             } else {
-                return Ok(_artistsService.Save(hash));
+                //Delete
+                bool artistDeleted = _artistsService.Delete(artist);
+                Dictionary<string, object> item = new Dictionary<string, object>();
+                if (artistDeleted)
+                {
+                    item["message"] = "Artist with id " + id + " was deleted.";
+                }
+                else 
+                {
+                    item["message"] = "Artist with id " + id + " is not deleted.";
+                }
+                return Ok(item);
             }
         } catch(Exception e) {
             Dictionary<string, string> msg = new Dictionary<string, string>();
             msg["message"] = "Something went wrong";
-
-            _logger.LogInformation(e.Message);
-            _logger.LogInformation(e.StackTrace);
+            System.Console.WriteLine(e.Message);
+            /*_logger.LogInformation(e.Message);
+            _logger.LogInformation(e.StackTrace);*/
             return StatusCode(StatusCodes.Status500InternalServerError, msg);
 
         }

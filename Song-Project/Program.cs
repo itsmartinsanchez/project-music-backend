@@ -35,6 +35,18 @@ builder.Services.AddScoped<ValidateRegister, ValidateRegister>();
 builder.Services.AddScoped<AuthenticationFilter, AuthenticationFilter>();
 builder.Services.AddScoped<AuthenticationService, AuthenticationService>();
 
+var  myCorsConfig = "_myCorsConfig";
+
+builder.Services.AddCors(options => {
+    options.AddPolicy(
+        name: myCorsConfig,
+        policy => {
+            policy.WithOrigins("*")
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        }
+    );
+});
 
 var app = builder.Build();
 
@@ -46,6 +58,7 @@ if (app.Environment.IsDevelopment())
 }
 
 //app.UseHttpsRedirection();
+app.UseCors();
 
 app.UseAuthorization();
 

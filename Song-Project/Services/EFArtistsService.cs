@@ -24,6 +24,21 @@ public class EFArtistsService : IArtistsService
         return artist;
     }
 
+    public bool Delete(Artist artist)
+    {
+       if (artist != null && artist.Id > 0)
+        {
+            _dataContext.Artist.Remove(artist);
+            _dataContext.SaveChanges();
+
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     public bool Exists(int id)
     {
         return _dataContext.Artist.SingleOrDefault(a => a.Id == id) != null;

@@ -105,4 +105,9 @@ public class RawArtistsService : IArtistsService
     {
         throw new NotImplementedException();
     }
+
+    public bool Delete(Artist artist)
+    {
+        throw new NotImplementedException();
+    }
 }
