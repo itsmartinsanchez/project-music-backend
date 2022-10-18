@@ -9,4 +9,5 @@ public interface ICommentsService
     public List<Comment> FindBySongId(int songId);
     public Comment Save(Comment comments);
     public Comment Save(Dictionary<string, object> hash);
+    public bool Delete(Comment comment);
 }

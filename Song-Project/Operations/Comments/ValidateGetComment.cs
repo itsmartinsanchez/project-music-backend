@@ -5,22 +5,17 @@ using Song_Project.Operations;
 
 public class ValidateGetComment : Validator
 {
-    public Comment Comments {get; set;}
-    public ValidateGetComment(Comment c)
+    public Comment Comment {get; set;}
+    public ValidateGetComment(Comment comments)
     {
-        Comments = c;
+        Comment = comments;
     }
     public override void run()
     {
-        if(Comments == null)
+        if(this.Comment == null)
         {
-            string m = "Comment not found";
-            Messages.Add(m);
-
-            Dictionary<string, object> mHash = new Dictionary<string, object>();
-            mHash["comments"] = m;
-
-            MessageHashes.Add(mHash);
+            String msg = "Comment not found";
+            this.AddError(msg, "id");
         }
     }
 }

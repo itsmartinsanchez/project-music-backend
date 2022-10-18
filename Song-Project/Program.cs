@@ -31,6 +31,7 @@ builder.Services.AddScoped<ValidateSaveComment, ValidateSaveComment>();
 builder.Services.AddScoped<ValidateSaveArtists, ValidateSaveArtists>();
 builder.Services.AddScoped<ValidateSaveSong, ValidateSaveSong>();
 builder.Services.AddScoped<ValidateDeleteArtist, ValidateDeleteArtist>();
+builder.Services.AddScoped<ValidateDeleteComment, ValidateDeleteComment>();
 builder.Services.AddScoped<ValidateRegister, ValidateRegister>();
 builder.Services.AddScoped<AuthenticationFilter, AuthenticationFilter>();
 builder.Services.AddScoped<AuthenticationService, AuthenticationService>();

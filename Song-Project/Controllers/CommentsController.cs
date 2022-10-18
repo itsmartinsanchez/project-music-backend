@@ -16,12 +16,14 @@ public class CommentsController : ControllerBase
     private readonly IUserService _usersService;
     private readonly ICommentsService _commentsService;
     private readonly ValidateSaveComment _validateSaveComment;
+    private readonly ValidateDeleteComment _validateDeleteComment;
     public CommentsController(
         ILogger<CommentsController> logger,
         ICommentsService commentsService, 
         ISongsService songsService,
         IUserService usersService,
-        ValidateSaveComment validateSaveComment
+        ValidateSaveComment validateSaveComment,
+        ValidateDeleteComment validateDeleteComment
         )
     {
         _logger = logger;
@@ -29,6 +31,7 @@ public class CommentsController : ControllerBase
         _songsService = songsService;
         _usersService = usersService;
         _validateSaveComment = validateSaveComment;
+        _validateDeleteComment = validateDeleteComment;
     }
     [HttpGet]
     public IActionResult Index()
@@ -90,4 +93,39 @@ public class CommentsController : ControllerBase
 
         }
     }
+
+    [HttpDelete("{id}")]
+    public IActionResult Delete(int id)
+    {
+        try
+        {
+            Comment comment = _commentsService.FindById(id);
+            Validator validator = new ValidateGetComment(comment);
+            validator.run();
+
+            if(validator.HasErrors){
+                return UnprocessableEntity(validator.Payload);
+            } else {
+                bool commentDeleted = _commentsService.Delete(comment);
+                Dictionary<string, object> item = new Dictionary<string, object>();
+                if (commentDeleted)
+                {
+                    item["message"] = "Comment with id: " + id + " was deleted.";
+                }
+                else 
+                {
+                    item["message"] = "Comment with id: " + id + " is not deleted.";
+                }
+                return Ok(item);
+            }     
+        }
+        catch(Exception e){
+            Dictionary<string, string> msg = new Dictionary<string, string>();
+            msg["message"] = "Something went wrong";
+            _logger.LogInformation(e.Message);
+            _logger.LogInformation(e.StackTrace);
+            return StatusCode(StatusCodes.Status500InternalServerError, msg);
+        }
+    }
+
 }

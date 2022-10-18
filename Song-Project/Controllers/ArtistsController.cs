@@ -104,8 +104,7 @@ public class ArtistsController : ControllerBase
 
         }
     }
-    [HttpDelete]
-    // remove payload
+    [HttpDelete("{id}")]
     public IActionResult Delete(int id)
     {
         try {

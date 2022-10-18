@@ -14,9 +14,25 @@ public class EFCommentsService : ICommentsService
     {
         _dataContext = dataContext;
     }
+
+    public bool Delete(Comment comment)
+    {
+       if (comment != null && comment.Id > 0)
+        {
+            _dataContext.Comment.Remove(comment);
+            _dataContext.SaveChanges();
+
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     public Comment FindById(int id)
     {
-       Comment temp = _dataContext.Comment.SingleOrDefault(s => s.Id == id);
+       Comment temp = _dataContext.Comment.SingleOrDefault(c => c.Id == id);
        
        return temp; 
     }
