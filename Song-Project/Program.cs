@@ -36,7 +36,7 @@ builder.Services.AddScoped<ValidateRegister, ValidateRegister>();
 builder.Services.AddScoped<AuthenticationFilter, AuthenticationFilter>();
 builder.Services.AddScoped<AuthenticationService, AuthenticationService>();
 
-var  myCorsConfig = "_myCorsConfig";
+var  myCorsConfig = "_myAllowSpecificOrigins";
 
 builder.Services.AddCors(options => {
     options.AddPolicy(
@@ -59,7 +59,7 @@ if (app.Environment.IsDevelopment())
 }
 
 //app.UseHttpsRedirection();
-app.UseCors();
+app.UseCors(myCorsConfig);
 
 app.UseAuthorization();
 
