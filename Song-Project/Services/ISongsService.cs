@@ -10,5 +10,6 @@ public interface ISongsService
     public Song Save(Song songs);
     public Song Save(Dictionary<string, object> hash);
     public bool Exists(int id);
+    public bool Delete(Song song);
 
 }

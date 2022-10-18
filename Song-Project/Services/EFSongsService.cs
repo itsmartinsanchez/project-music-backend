@@ -15,6 +15,21 @@ public class EFSongsService : ISongsService
         _dataContext = dataContext;
     }
 
+    public bool Delete(Song song)
+    {
+       if (song != null && song.Id > 0)
+        {
+            _dataContext.Song.Remove(song);
+            _dataContext.SaveChanges();
+
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     public bool Exists(int id)
     {
          return _dataContext.Song.SingleOrDefault(s => s.Id == id) != null;

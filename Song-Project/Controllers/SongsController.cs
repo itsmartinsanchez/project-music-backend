@@ -112,4 +112,38 @@ public class SongsController : ControllerBase
         Console.WriteLine("Returning song comments...");
         return Ok(comments);
     }
+
+    [HttpDelete("id")]
+    public IActionResult Delete(int id)
+    {
+        try
+        {
+            Song song = _songsService.FindById(id);
+            Validator validator = new ValidateGetSong(song);
+            validator.run();
+
+            if(validator.HasErrors){
+            return UnprocessableEntity(validator.Payload);
+            } else {
+            bool songDeleted = _songsService.Delete(song);
+            Dictionary<string, object> item = new Dictionary<string, object>();
+            if (songDeleted)
+            {
+                item["message"] = "Song with id: " + id + " was deleted.";    
+            }
+            else
+            {
+                item["message"] = "Song with id: " + id + "is not deleted.";
+            }
+            return Ok(item);
+            }
+        }
+        catch(Exception e){
+        Dictionary<string, string> msg = new Dictionary<string, string>();
+            msg["message"] = "Something went wrong";
+            _logger.LogInformation(e.Message);
+            _logger.LogInformation(e.StackTrace);
+            return StatusCode(StatusCodes.Status500InternalServerError, msg);
+        }
+    }
 }
