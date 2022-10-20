@@ -47,16 +47,26 @@ public class EFCommentsService : ICommentsService
         return _dataContext.Comment.ToList();
     }
 
-    public Comment Save(Comment comments)
+    public Comment Save(Comment c)
     {
-        if(comments.Id == null || comments.Id == 0)
+        if(c.Id == null || c.Id == 0)
         {
-            _dataContext.Comment.Add(comments);
+            //create
+            _dataContext.Comment.Add(c);
+        }
+        else
+        {
+            //update
+            Comment temp = this.FindById(c.Id);
+            temp.SongId = c.SongId;
+            temp.Rating = c.Rating;
+            temp.UserId = c.UserId;
+            temp.Content = c.Content;
         }
 
         _dataContext.SaveChanges();
 
-        return comments;
+        return c;
     }
 
     public Comment Save(Dictionary<string, object> hash)

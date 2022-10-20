@@ -84,8 +84,10 @@ public class EFArtistsService : IArtistsService
     {
         if(a.Id == null || a.Id == 0)
         {
+            //create
             _dataContext.Artist.Add(a);
         } else {
+            //update
             Artist temp = this.FindById(a.Id);
             temp.Name = a.Name;
         }

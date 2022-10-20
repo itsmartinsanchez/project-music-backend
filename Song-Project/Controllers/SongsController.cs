@@ -64,8 +64,7 @@ public class SongsController : ControllerBase
             if(_validateSaveSong.HasErrors) {
                 return UnprocessableEntity(_validateSaveSong.Payload);
             } else {
-                Song temp = _songsService.Save(hash);
-                return Ok(temp);
+                return Ok(_songsService.Save(hash));
             }
         } catch(Exception e) {
             Dictionary<string, string> msg = new Dictionary<string, string>();

@@ -54,16 +54,26 @@ public class EFSongsService : ISongsService
         return _dataContext.Song.ToList();
     }
 
-    public Song Save(Song songs)
+    public Song Save(Song s)
     {
-        if(songs.Id == null || songs.Id == 0)
+        if(s.Id == null || s.Id == 0)
         {
-            _dataContext.Song.Add(songs);
+            //create
+            _dataContext.Song.Add(s);
+        }
+        else
+        {
+            //update
+            Song temp = this.FindById(s.Id);
+            temp.ArtistId = s.ArtistId;
+            temp.Title = s.Title;
+            temp.Lyrics = s.Lyrics;
+            temp.Album = s.Album;
         }
 
         _dataContext.SaveChanges();
 
-        return songs;
+        return s;
     }
 
     public Song Save(Dictionary<string, object> hash)
