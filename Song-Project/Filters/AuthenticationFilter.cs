@@ -33,7 +33,7 @@ class AuthenticationFilter : Attribute, IAuthorizationFilter
 
         if(!isAuthenticated) {
             Dictionary<string, object> payload = new Dictionary<string, object>();
-            payload.Add("message", "Unauthenticated");
+            payload.Add("message", "Unauthenticated!!");
 
             context.Result = new UnauthorizedObjectResult(payload);
         }

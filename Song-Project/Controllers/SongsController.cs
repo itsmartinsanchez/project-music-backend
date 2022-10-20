@@ -113,7 +113,7 @@ public class SongsController : ControllerBase
         return Ok(comments);
     }
 
-    [HttpDelete("id")]
+    [HttpDelete]
     public IActionResult Delete(int id)
     {
         try
