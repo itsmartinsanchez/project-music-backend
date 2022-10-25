@@ -8,4 +8,8 @@ public interface IUserService
     public User Register(string username, string password, string role);
     public User FindByToken(string token);
     public bool Exists(int id);
+    public User FindByUserId(int userId);
+    public void Logout(string username);
+    public User CheckRole(string username);
+
 }

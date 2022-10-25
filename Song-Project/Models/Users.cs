@@ -9,4 +9,14 @@ public class User
     public DateTime ?LastLogin { get; set; }
     public string ?Role { get; set; }
     public DateTime ?TokenExpiration { get; set; }
+    public User(int id, string username)
+    {
+        this.Id = id;
+        this.Username = username;
+    }
+
+    public User()
+    {
+        
+    }
 }

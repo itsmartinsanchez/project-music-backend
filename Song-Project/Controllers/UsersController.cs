@@ -29,12 +29,12 @@ public class UsersController : ControllerBase
         _authenticationService = authenticationService;
     }
 
-    [HttpPost("logout")]
-    [ServiceFilter(typeof(AuthenticationFilter))]
-    public ActionResult Logout()
+    [HttpPut("{username}/logout")]
+    //[ServiceFilter(typeof(AuthenticationFilter))]
+    public ActionResult Logout(string username)
     {
         User user = (User)HttpContext.Items["user"];
-        _authenticationService.Logout(user);
+        _userService.Logout(username);
 
         Dictionary<string, string> msg = new Dictionary<string, string>();
         msg["message"] = "Successfully logged out";
@@ -98,6 +98,24 @@ public class UsersController : ControllerBase
             }
         }
         catch(Exception e)
+        {
+            Dictionary<string, string> msg = new Dictionary<string, string>();
+            msg["message"] = "Something went wrong";
+
+            return StatusCode(StatusCodes.Status500InternalServerError, msg);
+        }
+    }
+    
+    [HttpGet("{username}")]
+    public ActionResult GetUserRole(string username)
+    {
+        try
+        {
+            User user = _userService.CheckRole(username);
+
+            return Ok(user);
+        }
+        catch (Exception e)
         {
             Dictionary<string, string> msg = new Dictionary<string, string>();
             msg["message"] = "Something went wrong";

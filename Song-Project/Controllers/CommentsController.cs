@@ -6,6 +6,7 @@ using System.Text.Json;
 using Song_Project.Services;
 using Song_Project.Operations;
 using Song_Project.Operations.Comments;
+using Song_Project.Operations.Users;
 
 [ApiController]
 [Route("comments")]
@@ -125,6 +126,22 @@ public class CommentsController : ControllerBase
             _logger.LogInformation(e.Message);
             _logger.LogInformation(e.StackTrace);
             return StatusCode(StatusCodes.Status500InternalServerError, msg);
+        }
+    }
+
+    [HttpGet("username")]
+    public IActionResult ShowUser(int userId)
+    {
+        try{
+            System.Console.WriteLine("Returning username of id: " + userId);
+            User user = _usersService.FindByUserId(userId);
+            return Ok(user);
+        }
+        catch(Exception e){
+            _logger.LogInformation(e.Message);
+            //_logger.LogInformation(e.StackTrace);
+            return UnprocessableEntity(e.StackTrace);
+
         }
     }
 

@@ -103,7 +103,7 @@ public class SongsController : ControllerBase
         }
     }
     
-    [HttpGet("id/comments")]
+    [HttpGet("comments")]
     public IActionResult ShowComments(int songId)
     {
         List<Comment> comments = _commentsService.FindBySongId(songId);
