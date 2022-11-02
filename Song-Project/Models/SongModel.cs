@@ -1,7 +1,7 @@
 namespace Song_Project.Models;
 using Song_Project.Services;
 
-public class Song
+public class SongModel
 {
     private readonly IArtistsService _artistsService;
     public Int32 Id {get; set;}
@@ -9,14 +9,5 @@ public class Song
     public Int32 ArtistId {get; set;}
     public string Lyrics {get; set;}
     public string Album {get; set;}
-    public string? ArtistName {get; set;}
-    public Song(){}
-    public Song(string title, string lyrics, string album)
-    {
-        this.Title = title;
-        this.Lyrics =lyrics;
-        this.Album = album;
-        //this.ArtistName = artistName;
-    } 
-
+    public SongModel(){}
 }

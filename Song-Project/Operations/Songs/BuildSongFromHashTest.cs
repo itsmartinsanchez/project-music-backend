@@ -1,37 +1,36 @@
 namespace Song_Project.Operations.Songs;
-
 using Song_Project.Models;
 
-public class BuildSongFromHash
+public class BuildSongFromHashes
 {
     public Dictionary<string, object> Hash { get; set; }
-    public Song Songs {get; set;}
-    public BuildSongFromHash(Dictionary<string, object> hash)
+    public SongModel SongTest {get; set;}
+    public BuildSongFromHashes(Dictionary<string, object> hash)
     {
         Hash = hash;
-        Songs = new Song();
+        SongTest = new SongModel();
     }
 
     public void run()
     {
         if(Hash.GetValueOrDefault("id") != null) {
-            Songs.Id = Int32.Parse(Hash["id"].ToString());
+            SongTest.Id = Int32.Parse(Hash["id"].ToString());
         }
 
         if(Hash.GetValueOrDefault("title") != null) {
-            Songs.Title = Hash["title"].ToString();
+            SongTest.Title = Hash["title"].ToString();
         }
         
         if(Hash.GetValueOrDefault("artistId") != null) {
-            Songs.ArtistId = Int32.Parse(Hash["artistId"].ToString());
+            SongTest.ArtistId = Int32.Parse(Hash["artistId"].ToString());
         }
 
         if(Hash.GetValueOrDefault("lyrics") != null) {
-            Songs.Lyrics = Hash["lyrics"].ToString();
+           SongTest.Lyrics = Hash["lyrics"].ToString();
         }
 
         if(Hash.GetValueOrDefault("album") != null) {
-            Songs.Album = Hash["album"].ToString();
+           SongTest.Album = Hash["album"].ToString();
         }
         
         // if(Hash.GetValueOrDefault("artistName") != null){

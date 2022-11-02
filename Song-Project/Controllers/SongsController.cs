@@ -31,7 +31,7 @@ public class SongsController : ControllerBase
     [HttpGet]
     public IActionResult Index()
     {
-        List<Song> songs = _songsService.GetAll();
+        List<Song> songs = _songsService.GetAll_Test();
 
         Console.WriteLine("Returning all songs...");
         return Ok(songs);
@@ -40,7 +40,7 @@ public class SongsController : ControllerBase
     [HttpGet("{id}")]
     public IActionResult Show(int id)
     {
-        Song songs = _songsService.FindById(id);
+        Song songs = _songsService.FindById_Test(id);
 
         Validator validator = new ValidateGetSong(songs); 
         validator.run();
@@ -57,6 +57,7 @@ public class SongsController : ControllerBase
     {
         try {
             Dictionary<string, object> hash = JsonSerializer.Deserialize<Dictionary<string, object>>(payload.ToString());
+            
             hash["id"] = id;
             _validateSaveSong.InitializeParameters(hash);
             _validateSaveSong.run();
@@ -69,6 +70,7 @@ public class SongsController : ControllerBase
         } catch(Exception e) {
             Dictionary<string, string> msg = new Dictionary<string, string>();
             msg["message"] = "Something went wrong";
+            
             _logger.LogInformation(e.Message);
             _logger.LogInformation(e.StackTrace);
 
@@ -89,12 +91,15 @@ public class SongsController : ControllerBase
             if(_validateSaveSong.HasErrors) {
                 return UnprocessableEntity(_validateSaveSong.Payload);
             } else {
+                System.Console.WriteLine("Saving..");
                 Song temp = _songsService.Save(hash);
+                System.Console.WriteLine(temp);
                 return Ok(temp);
             }
         } catch(Exception e) {
             Dictionary<string, string> msg = new Dictionary<string, string>();
-            msg["message"] = "Something went wrong";
+            msg["message"] = "Error: " + e.InnerException.Message;
+            msg["stackTrace"] = "Stack Trace: " + e.InnerException.StackTrace;
             _logger.LogInformation(e.Message);
             _logger.LogInformation(e.StackTrace);
 
@@ -117,7 +122,7 @@ public class SongsController : ControllerBase
     {
         try
         {
-            Song song = _songsService.FindById(id);
+            Song song = _songsService.FindById_Test(id);
             Validator validator = new ValidateGetSong(song);
             validator.run();
 
@@ -139,7 +144,8 @@ public class SongsController : ControllerBase
         }
         catch(Exception e){
         Dictionary<string, string> msg = new Dictionary<string, string>();
-            msg["message"] = "Something went wrong";
+            msg["message"] = "Error: " + e.InnerException.Message;
+            msg["stackTrace"] = "Stack Trace: " + e.StackTrace;
             _logger.LogInformation(e.Message);
             _logger.LogInformation(e.StackTrace);
             return StatusCode(StatusCodes.Status500InternalServerError, msg);

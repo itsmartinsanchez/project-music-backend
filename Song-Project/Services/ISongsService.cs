@@ -11,5 +11,10 @@ public interface ISongsService
     public Song Save(Dictionary<string, object> hash);
     public bool Exists(int id);
     public bool Delete(Song song);
+    public Song FindById_Test(int id);
+    public List<Song> GetAll_Test();
+    public Song Save_Test(Song song);
+    public bool Exists_Test(int id);
+    //public SongModel SaveTest(Dictionary<string, object> hash);
 
 }

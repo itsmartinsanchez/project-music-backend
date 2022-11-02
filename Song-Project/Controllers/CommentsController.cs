@@ -145,4 +145,18 @@ public class CommentsController : ControllerBase
         }
     }
 
+    [HttpGet("id")]
+    public IActionResult FindById(int commentId)
+    {
+        try {
+            Comment comment = _commentsService.FindById(commentId);
+            return Ok(comment);
+        }
+        catch(Exception e){
+            _logger.LogInformation(e.Message);
+            //_logger.LogInformation(e.StackTrace);
+            return UnprocessableEntity(e.StackTrace);
+    }
+
+    }
 }

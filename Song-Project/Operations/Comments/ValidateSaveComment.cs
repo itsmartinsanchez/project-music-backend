@@ -61,14 +61,14 @@ public class ValidateSaveComment : Validator
         if(this.UserId == null || this.UserId.Equals("")) {
             String msg = "User Id is required";
             this.AddError(msg, "userId");
-        } else if(!_usersService.Exists(this.UserId)) {
-            String msg = "User not found";
-            this.AddError(msg, "userId");
+        // } else if(!_usersService.Exists(this.UserId)) {
+        //     String msg = "User not found";
+        //     this.AddError(msg, "userId");
         }
         if(this.SongId == null || this.SongId.Equals("")) {
             String msg = "Song Id is required";
             this.AddError(msg, "songId");
-        } else if(!_songsService.Exists(this.SongId)) {
+        } else if(!_songsService.Exists_Test(this.SongId)) {
             String msg = "Song not found";
             this.AddError(msg, "songId");
         }

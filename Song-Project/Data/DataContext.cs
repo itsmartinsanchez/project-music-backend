@@ -9,6 +9,7 @@ public class DataContext : DbContext
     public DbSet<Song> Song {get; set;}
     public DbSet<User> User { get; set; }
     public DbSet<Comment> Comment {get; set;}
+    public DbSet<SongModel> SongTest {get; set;}
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
