@@ -83,7 +83,7 @@ public class EFSongsService : ISongsService
         var builder = new BuildSongFromHash(hash);
         builder.run();
 
-        return this.Save(builder.Songs);
+        return this.Save_Test(builder.Songs);
     }
 
     public Song FindById_Test(int id)
@@ -142,29 +142,77 @@ public class EFSongsService : ISongsService
         SqlConnection connection = new SqlConnection(
         ApplicationManager.Instance.GetConnectionString()
         );
+        String sql = "";
+        SqlCommand command;
+        SqlDataAdapter adapter = new SqlDataAdapter(); 
+       
 
         connection.Open();
+        System.Console.WriteLine("SQL Query:");
 
-        String sql = "INSERT INTO Song (Album, ArtistId, Lyrics, Title)" + 
-                        "VALUES (@Album, @ArtistId, @Lyrics, @Title);";
-
-        if(s.Id != null) {
-        // UPDATE
-        sql = "UPDATE Song SET Album=@Album, ArtistId=@ArtistId, Lyrics=@Lyrics, Title=@Title WHERE Id=@Id";
-        }
-        SqlCommand command = new SqlCommand(sql, connection);
+        sql =    "INSERT INTO Song (Album, ArtistId, Lyrics, Title)" + 
+                        "VALUES (@Album, @ArtistId, @Lyrics, @Title);"+
+                        "SELECT Song.ArtistID, Song.Album, Song.Id, Song.Title, Song.Lyrics, Artist.Name from Song " +
+                        "INNER Join Artist ON Song.ArtistID=Artist.Id";
+                        
+        command = new SqlCommand(sql, connection);
+        // if(s.Id != null) {
+        // // // UPDATE
+        // sql = "UPDATE Song SET Album=@Album, ArtistId=@ArtistId, Lyrics=@Lyrics, Title=@Title WHERE Id=@Id";
+        // }
         
-        if(s.Id != null) {
-        command.Parameters.AddWithValue("@Id", s.Id);
-        }
-
+        // if(s.Id != null) {
+        // command.Parameters.AddWithValue("@Id", s.Id);
+        // }
         command.Parameters.AddWithValue("@Album", s.Album);
         command.Parameters.AddWithValue("@ArtistId", s.ArtistId);
         command.Parameters.AddWithValue("@Lyrics", s.Lyrics);
         command.Parameters.AddWithValue("@Title", s.Title);
+         
+        
+        //adapter.InsertCommand = new SqlCommand(sql, connection);
+        //adapter.InsertCommand.ExecuteNonQuery();
 
         command.ExecuteNonQuery();
+        //command.Dispose();
+        connection.Close();
 
+        return s;
+
+    }
+
+    public Song Update(Dictionary<string, object> hash)
+    {
+        var builder = new BuildSongFromHash(hash);
+        builder.run();
+
+        return this.Update_Test(builder.Songs);
+    }
+
+    public Song Update_Test(Song s)
+    {
+        SqlConnection connection = new SqlConnection(
+        ApplicationManager.Instance.GetConnectionString()
+        );
+        String sql = "";
+        SqlCommand command;
+        SqlDataAdapter adapter = new SqlDataAdapter(); 
+       
+
+        connection.Open();
+        System.Console.WriteLine("SQL Query:");
+
+            sql =  "UPDATE Song SET Album=@Album, ArtistId=@ArtistId, Lyrics=@Lyrics, Title=@Title WHERE Id=@Id; " +
+                   "SELECT Song.ArtistID, Song.Album, Song.Id, Song.Title, Song.Lyrics, Artist.Name from Song " +
+                   "INNER Join Artist ON Song.ArtistID=Artist.Id";
+
+        command = new SqlCommand(sql, connection);
+        command.Parameters.AddWithValue("@Id", s.Id);
+        command.Parameters.AddWithValue("@Album", s.Album);
+        command.Parameters.AddWithValue("@ArtistId", s.ArtistId);
+        command.Parameters.AddWithValue("@Lyrics", s.Lyrics);
+        command.Parameters.AddWithValue("@Title", s.Title);
+        command.ExecuteNonQuery();
         connection.Close();
 
         return s;

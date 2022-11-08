@@ -53,6 +53,18 @@ public class ArtistsController : ControllerBase
         }
     }
 
+    [HttpGet("name")]
+    public IActionResult FindByName([FromBody]object payload, string name)
+    {
+        Dictionary<string, object> hash = JsonSerializer.Deserialize<Dictionary<string, object>>(payload.ToString());
+        hash["name"] = name;
+
+        Artist artists = _artistsService.FindByName(name);
+
+        return Ok(artists);
+    }
+
+
     [HttpPut("{id}")]
     public IActionResult Update([FromBody]object payload, int id)
     {

@@ -10,6 +10,7 @@ public class Song
     public string Lyrics {get; set;}
     public string Album {get; set;}
     public string? ArtistName {get; set;}
+    //public ICollection<Artist> Artists { get; set; }
     public Song(){}
     public Song(string title, string lyrics, string album)
     {
