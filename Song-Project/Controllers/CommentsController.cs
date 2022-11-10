@@ -37,7 +37,7 @@ public class CommentsController : ControllerBase
     [HttpGet]
     public IActionResult Index()
     {
-        List<Comment> comments = _commentsService.GetAll();
+        List<Comment> comments = _commentsService.GetAll_Test();
 
         Console.WriteLine("Returning all comments...");
         return Ok(comments);
@@ -100,7 +100,7 @@ public class CommentsController : ControllerBase
     {
         try
         {
-            Comment comment = _commentsService.FindById(id);
+            Comment comment = _commentsService.FindById_Test(id);
             Validator validator = new ValidateGetComment(comment);
             validator.run();
 
@@ -149,7 +149,7 @@ public class CommentsController : ControllerBase
     public IActionResult FindById(int commentId)
     {
         try {
-            Comment comment = _commentsService.FindById(commentId);
+            Comment comment = _commentsService.FindById_Test(commentId);
             return Ok(comment);
         }
         catch(Exception e){

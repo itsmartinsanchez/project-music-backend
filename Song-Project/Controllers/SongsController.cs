@@ -111,7 +111,7 @@ public class SongsController : ControllerBase
     [HttpGet("comments")]
     public IActionResult ShowComments(int songId)
     {
-        List<Comment> comments = _commentsService.FindBySongId(songId);
+        List<Comment> comments = _commentsService.FindBySongId_Test(songId);
 
         Console.WriteLine("Returning song comments...");
         return Ok(comments);
